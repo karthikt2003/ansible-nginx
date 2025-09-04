@@ -1,0 +1,25 @@
+---
+- name: Install Nginx and deploy custom index.html
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Ensure Nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy custom index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: "hi jenkins ansible\n"
+        owner: www-data
+        group: www-data
+        mode: '0644'
