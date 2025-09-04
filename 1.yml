@@ -9,13 +9,13 @@
       loop:
         - ngnix
         - apache2
-      - name: install package
-        apt:
-          name: nginx
-          state: present
-          update_cache: yes
+    - name: install package
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
 
-      - name: create the file
-        copy:
-          src: index.html
-          dest: /var/www/html/
+    - name: create the file
+      copy:
+        src: ./index.html
+        dest: /var/www/html/
